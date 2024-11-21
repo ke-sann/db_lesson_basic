@@ -1,0 +1,76 @@
+Q1
+CREATE TABLE departments(
+department_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+name VARCHAR(20) NOT NULL,
+created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+Q2
+ALTER TABLE people ADD department_id INT UNSIGNED AFTER email;
+
+Q3
+INSERT INTO departments (name)
+VALUES
+('営業'),
+('開発'),
+('経理'),
+('人事'),
+('情報システム');
+
+INSERT INTO people (name)
+VALUES
+('営業'),
+('営業'),
+('営業'),
+('開発'),
+('開発'),
+('開発'),
+('開発'),
+('経理'),
+('人事'),
+('情報システム');
+
+UPDATE reports SET content = 'あああああああああああ' WHERE report_id = 1;
+UPDATE reports SET content = 'いいいいいいいいいいい' WHERE report_id = 2;
+UPDATE reports SET content = 'ううううううううううう' WHERE report_id = 3;
+UPDATE reports SET content = 'えええええええええええ' WHERE report_id = 4;
+UPDATE reports SET content = 'おおおおおおおおおおお' WHERE report_id = 6;
+UPDATE reports SET content = 'かかかかかかかかかかか' WHERE report_id = 7;
+UPDATE reports SET content = 'ききききききききききき' WHERE report_id = 8;
+UPDATE reports SET content = 'くくくくくくくくくくく' WHERE report_id = 9;
+UPDATE reports SET content = 'けけけけけけけけけけけ' WHERE report_id = 10;
+UPDATE reports SET content = 'こここここここここここ' WHERE report_id = 11;
+
+Q4
+UPDATE people SET department_id = '1' WHERE person_id BETWEEN 7 AND 9;
+UPDATE people SET department_id = '2' WHERE person_id BETWEEN 10 AND 13;
+UPDATE people SET department_id = '3' WHERE person_id = 14;
+UPDATE people SET department_id = '4' WHERE person_id = 15;
+UPDATE people SET department_id = '5' WHERE person_id = 16;
+UPDATE people SET department_id = '1' WHERE person_id BETWEEN 1 AND 6;
+
+Q5
+SELECT name,age FROM people ORDER BY age DESC;
+
+Q6
+テーブルpeopleからレコードdepartment_id = 1 にある カラム　created_at　を昇順にしたデータの中から、カラム neme,email,age　を取得してください。
+
+Q7
+SELECT name FROM people WHERE 20 <= age AND age < 30 AND gender = 2 OR 40 <= age AND age < 50;
+
+Q8
+SELECT * FROM people WHERE department_id = 1 ORDER BY age;
+
+Q9
+SELECT AVG(age) AS average_age FROM people GROUP BY gender = 2 AND department_id = 2;
+
+Q10
+SELECT people.name, departments.name,reports.content
+FROM people INNER JOIN reports ON people.person_id = reports.person_id
+INNER JOIN departments ON people.department_id = departments.department_id;
+
+Q11
+ SELECT p.name FROM people p LEFT OUTER JOIN reports r USING (person_id) WHERE content IS NULL;
+
+
